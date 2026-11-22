@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>리뷰 비서 만들기</title>
+<meta name="description" content="GPT와 Aside로 만드는 매장 리뷰 비서 원데이 강의 자료. 리뷰 확인부터 답글 초안까지 실제로 작동하는 걸 만들어요.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-title="리뷰 비서 만들기">
+<div id="progress"></div>
+<main id="deck">
+
+<!-- ===================== 시작 ===================== -->
+
+<div class="frame"><section class="slide" data-p="" data-section="시작" data-title="표지">
+  <p class="path">AI with Paul</p>
+  <h1 style="font-size:96px;margin-top:70px">리뷰 비서<br>만들기</h1>
+  <p class="lead">리뷰 확인부터 답글 초안까지, 오늘 실제로 작동하는 걸 만들어요</p>
+  <div class="cols c3" style="margin-top:96px">
+    <div class="card"><h3>출발점은 지금 쓰시는 GPT</h3><p class="small sub">새로 가입할 것 없이, 구독 중인 GPT 그대로 써요.</p></div>
+    <div class="card"><h3>프롬프트는 복사로</h3><p class="small sub">글자 위 노란 버튼을 누르면 바로 복사돼요.</p></div>
+    <div class="card tint"><h3>오늘은 실제로 작동하는 것까지</h3><p class="small sub">복잡한 서버는 안 만들어요. 코딩 없이 바로 되는 것까지만요.</p></div>
+  </div>
+  <p class="tiny faint" style="position:absolute;left:148px;bottom:92px">키보드 ← → 로 넘기고 G 를 누르면 목차가 열려요.</p>
+<div class="foot"><span>AI with Paul</span><span>1</span></div></section></div>
+
+<div class="frame"><section class="slide" data-p="" data-section="시작" data-title="오늘 목표">
+  <p class="path">오늘 목표</p>
+  <h1>리뷰 확인부터 답글 초안까지, 오늘 하루에 완성해요</h1>
+  <ul class="list mt-l">
+    <li><b>GPT 기본기</b> 다지기 — 헷갈렸던 용어들 정리</li>
+    <li><b>리뷰 비서 기획하기</b> — 다른 매장 답글 스타일 참고해서 내 톤 정하기</li>
+    <li><b>Aside로 실제 작동하는 에이전트 만들기</b> — 리뷰 확인하고 답글 초안까지</li>
+  </ul>
+  <p class="mt-l" style="font-size:36px"><mark>완전 자동 크롤링 서버 같은 건 안 만들어요. Aside라는 도구로 코딩 없이 바로 되는 것까지만요.</mark></p>
+<div class="foot"><span>AI with Paul</span><span>2</span></div></section></div>
+
+<div class="frame"><section class="slide" data-p="" data-section="시작" data-title="GPT 용어 쉽게 정리">
+  <p class="path">먼저 알아두기</p>
+  <h1>자주 듣는 용어, 오늘 한 번에 정리해요</h1>
+  <div class="cols c3 mt">
+    <div class="card"><h3>GPTs</h3><p class="small sub">내가 원하는 역할을 미리 설정해 둔 맞춤 챗봇이에요.</p></div>
+    <div class="card"><h3>프로젝트</h3><p class="small sub">관련 대화·파일을 한 폴더처럼 묶어두는 기능이에요.</p></div>
+    <div class="card"><h3>Codex</h3><p class="small sub">코드를 직접 짜고 실행해주는 전문 기능이에요. 오늘은 안 써요.</p></div>
+  </div>
+  <p class="mt-l" style="font-size:36px"><mark>앱과 웹은 메뉴 위치만 다를 뿐, 같은 계정에 거의 같은 기능이에요.</mark></p>
+<div class="foot"><span>AI with Paul</span><span>3</span></div></section></div>
+
+<div class="frame"><section class="slide" data-p="" data-section="시작" data-title="Aside가 뭔지">
+  <p class="path">먼저 알아두기</p>
+  <h1>Aside는 로그인해 둔 사이트를 대신 조작해주는 브라우저예요</h1>
+  <div class="cols c2 mt">
+    <div class="card"><h3>GPT 같은 챗봇</h3><p class="small sub" style="margin:0">물어보면 정보를 찾아서 알려줘요.</p></div>
+    <div class="card tint"><h3>Aside</h3><p class="small sub" style="margin:0">내 네이버 로그인 상태 그대로 써서, 직접 사이트에 들어가 리뷰를 확인해요.</p></div>
+  </div>
+  <p class="mt-l" style="font-size:36px"><mark>그래서 오늘은 리뷰 확인은 Aside로, 나머지는 그대로 GPT로 해요.</mark></p>
+<div class="foot"><span>AI with Paul</span><span>4</span></div></section></div>
+
+<div class="frame"><section class="slide" data-p="" data-section="시작" data-title="오늘 흐름 한눈에">
+  <p class="path">오늘 흐름</p>
+  <h1>기획하고, 리뷰를 확인하고, 답글 초안까지 받아요</h1>
+  <p class="lead">GPT와 Aside가 일을 하고, 우리는 설명하고 고르고 결정해요.</p>
+  <div class="flow mt-l">
+    <div class="node p1 on"><b>1 기획</b>레퍼런스·grill-me</div>
+    <div class="arrow">›</div>
+    <div class="node p2 on"><b>2 리뷰 확인</b>Aside 루틴 만들기</div>
+    <div class="arrow">›</div>
+    <div class="node p2 on"><b>3 답글 초안</b>톤에 맞춰 작성</div>
+    <div class="arrow">›</div>
+    <div class="node p2 on"><b>4 알림</b>받는 방법 (선택)</div>
+  </div>
+  <div class="card p2 edge-l mt-l">
+    <h3 class="ac">오늘이 끝나면 과제로</h3>
+    <p class="small" style="margin:0">AI 검색 노출 · 이미지 일관성 · 로컬 vs 클라우드는 설명으로 다뤄요</p>
+  </div>
+<div class="foot"><span>AI with Paul</span><span>5</span></div></section></div>
+
+<div class="frame"><section class="slide" data-p="" data-section="시작" data-title="준비">
+  <p class="path">준비</p>
+  <h1>로그인 세 가지만 미리 확인해요</h1>
+  <ul class="checks mt-l" data-id="accounts">
+    <li><span class="box">✓</span><div><b>GPT</b><span>지금 구독 중인 계정 로그인 확인</span></div></li>
+    <li><span class="box">✓</span><div><b>Aside</b><span>가입·로그인 확인</span></div></li>
+    <li><span class="box">✓</span><div><b>네이버 스마트플레이스 (사장님 광장)</b><span>로그인해 둬야 Aside가 리뷰를 볼 수 있어요</span></div></li>
+  </ul>
+<div class="foot"><span>AI with Paul</span><span>6</span></div></section></div>
+
+<!-- ===================== 1단계 기획 ===================== -->
+
+<div class="frame"><section class="slide" data-p="1" data-section="1단계 기획" data-title="1-1 다른 매장 답글 레퍼런스 분석">
+  <p class="path">1단계 · 1-1 레퍼런스 · 프롬프트</p>
+  <h1>다른 매장 답글이 좋은 레퍼런스예요</h1>
+  <div class="prompt mt"><div class="prompt-head"><span>1-1 레퍼런스 분석</span><button class="copy" type="button" aria-label="1-1 레퍼런스 분석 프롬프트 복사">복사</button></div><pre>다른 미용실(또는 비슷한 매장)의 리뷰 답글 캡처를 분석해줘. [캡처 2~3장]
+톤, 자주 쓰는 표현, 안 좋은 리뷰에는 어떻게 답하는지 정리해서
+레퍼런스.md로 저장해줘.</pre></div>
+  <p class="prompt-note">평소 다니던 곳이나, 리뷰 많고 평점 좋은 미용실을 찾아서 캡처해요.</p>
+<div class="foot"><span>AI with Paul</span><span>7</span></div></section></div>
+
+<div class="frame"><section class="slide" data-p="1" data-section="1단계 기획" data-title="1-2 grill-me로 리뷰 비서 기획하기">
+  <p class="path">1단계 · 1-2 기획 · 프롬프트</p>
+  <h1>질문에 답하면서 내 비서의 톤과 방식을 정해요</h1>
+  <div class="prompt mt"><div class="prompt-head"><span>1-2 grill-me 기획</span><button class="copy" type="button" aria-label="1-2 grill-me 기획 프롬프트 복사">복사</button></div><pre>레퍼런스.md를 보고 grill-me 방식으로
+제 매장 리뷰 답글 톤과 리뷰 확인 방식을 같이 정해주세요.
+한 번에 하나씩 질문해주세요.</pre></div>
+  <p class="prompt-note">답글 톤(친근함 vs 격식), 확인 주기(매일·주 2회), 안 좋은 리뷰 대응법 같은 걸 답하면서 정해져요.</p>
+<div class="foot"><span>AI with Paul</span><span>8</span></div></section></div>
+
+<!-- ===================== 2단계 에이전트 만들기 ===================== -->
+
+<div class="frame"><section class="slide" data-p="2" data-section="2단계 리뷰 비서 만들기" data-title="2-1 Aside로 리뷰 확인 루틴 만들기">
+  <p class="path">2단계 · 2-1 루틴 · 프롬프트</p>
+  <h1>Aside에게 리뷰 확인을 맡겨요</h1>
+  <div class="prompt mt"><div class="prompt-head"><span>2-1 리뷰 확인 루틴 만들기</span><button class="copy" type="button" aria-label="2-1 리뷰 확인 루틴 만들기 프롬프트 복사">복사</button></div><pre>네이버 스마트플레이스(사장님 광장)에 로그인된 상태에서
+매일 [시간]에 우리 매장 리뷰를 확인해서
+새 리뷰가 있으면 알려주는 루틴을 만들어줘.</pre></div>
+  <p class="prompt-note">대화창에 말로 해도 등록되고, Settings → Routines에서 직접 만들어도 돼요.</p>
+<div class="foot"><span>AI with Paul</span><span>9</span></div></section></div>
+
+<div class="frame"><section class="slide" data-p="2" data-section="2단계 리뷰 비서 만들기" data-title="2-2 답글 초안 받기">
+  <p class="path">2단계 · 2-2 답글 초안 · 프롬프트</p>
+  <h1>확인한 리뷰에 맞춰 답글 초안까지 받아요</h1>
+  <div class="prompt mt"><div class="prompt-head"><span>2-2 답글 초안 받기</span><button class="copy" type="button" aria-label="2-2 답글 초안 받기 프롬프트 복사">복사</button></div><pre>새 리뷰를 확인하면, 기획안.md의 톤에 맞춰
+답글 초안도 같이 써줘.
+안 좋은 리뷰는 특히 신중하게 써줘.</pre></div>
+  <div class="cols c2 mt">
+    <div class="card"><h3>Aside가 하는 일</h3><p class="small sub" style="margin:0">리뷰 확인하기, 답글 초안 작성하기</p></div>
+    <div class="card"><h3>내가 하는 일</h3><p class="small sub" style="margin:0">답글 초안 최종 확인하고 직접 올리기</p></div>
+  </div>
+<div class="foot"><span>AI with Paul</span><span>10</span></div></section></div>
+
+<div class="frame"><section class="slide" data-p="2" data-section="2단계 리뷰 비서 만들기" data-title="2-3 폰으로 알림받기 (선택)">
+  <p class="path">2단계 · 2-3 알림 (선택)</p>
+  <h1>무료 플랜은 노트북에서, 연동하면 폰으로</h1>
+  <div class="cols c2 mt">
+    <div class="card"><h3>기본 (무료 플랜)</h3><p class="small sub" style="margin:0">Aside를 열 때 루틴 결과를 확인해요.</p></div>
+    <div class="card tint"><h3>텔레그램 연동 (Pro 플랜)</h3><p class="small sub" style="margin:0">Channels 기능으로 텔레그램 봇을 연결하면 결과가 폰으로 바로 와요.</p></div>
+  </div>
+  <p class="mt small sub">오늘은 기본 방식으로 먼저 완성하고, 폰 알림이 꼭 필요하면 다음에 연동만 추가하면 돼요.</p>
+<div class="foot"><span>AI with Paul</span><span>11</span></div></section></div>
+
+<div class="frame"><section class="slide" data-p="2" data-section="2단계 리뷰 비서 만들기" data-title="체크포인트">
+  <p class="path">2단계 · 체크포인트</p>
+  <h1>이렇게 되면 리뷰 비서 완성이에요</h1>
+  <ul class="checks compact mt" data-id="cp-agent">
+    <li><span class="box">✓</span><div><b>루틴 등록</b><span>정해진 시간에 실행되도록 루틴이 만들어져 있어요.</span></div></li>
+    <li><span class="box">✓</span><div><b>리뷰 확인</b><span>Aside가 네이버에 들어가서 리뷰를 확인해요.</span></div></li>
+    <li><span class="box">✓</span><div><b>답글 초안</b><span>정한 톤에 맞는 답글 초안이 나와요.</span></div></li>
+  </ul>
+<div class="foot"><span>AI with Paul</span><span>12</span></div></section></div>
+
+<!-- ===================== 과제로 이어가기 ===================== -->
+
+<div class="frame"><section class="slide" data-p="3" data-section="과제로 이어가기" data-title="다음에 더 해볼 것들">
+  <p class="path">과제 · 설명만</p>
+  <h1>오늘 못 다룬 것들, 다음에 이어가요</h1>
+  <div class="cols c3 mt">
+    <div class="card"><h3>AI 검색 노출</h3><p class="small sub">챗GPT 같은 AI 검색에서 매장 정보가 잘 보이게 정리해 두는 방법</p></div>
+    <div class="card"><h3>이미지 일관성</h3><p class="small sub">홍보 이미지를 만들 때 같은 느낌이 유지되게 하는 방법</p></div>
+    <div class="card"><h3>로컬 vs 클라우드</h3><p class="small sub">Aside는 내 컴퓨터가 켜져 있어야 돌아가요. 컴퓨터를 꺼도 계속 돌리려면 클라우드 서버가 따로 필요해요.</p></div>
+  </div>
+  <p class="mt-l" style="font-size:34px"><mark>오늘은 설명만 드려요. 필요하면 다음 회차에 이어서 해요.</mark></p>
+<div class="foot"><span>AI with Paul</span><span>13</span></div></section></div>
+
+<!-- ===================== 마무리 ===================== -->
+
+<div class="frame"><section class="slide" data-p="" data-section="마무리" data-title="질문과 마무리">
+  <p class="path">Q&amp;A</p>
+  <h1 style="font-size:120px;margin-top:40px">질문 받을게요</h1>
+  <p class="lead">이번 주에는 실제로 새 리뷰가 올라올 때 루틴이 잘 작동하는지 확인해 보세요.</p>
+  <div class="cols c2 mt-l">
+    <div class="card"><h3>프롬프트 다시 가져가기</h3><p class="small">아래 버튼을 누르거나, 이 주소에서 S 키를 누르면 스크롤로 훑으며 복사할 수 있어요.</p></div>
+    <div class="card"><h3>톤 다시 고치기</h3><p class="small">답글 초안이 마음에 안 들면 "더 ~한 느낌으로 고쳐줘"라고 말하면 돼요.</p></div>
+  </div>
+  <div class="mt-l"><a class="dl" href="prompts.html" target="_blank" rel="noopener">오늘 프롬프트 모음<small>새 창</small></a></div>
+  <p class="mt sub">오늘 수고 많으셨어요. 감사합니다.</p>
+<div class="foot"><span>AI with Paul</span><span>14</span></div></section></div>
+
+</main>
+<button class="edge l" id="edge-l" aria-label="이전 슬라이드"></button>
+<button class="edge r" id="edge-r" aria-label="다음 슬라이드"></button>
+<nav id="hud" aria-label="슬라이드 이동">
+  <button id="btn-prev" aria-label="이전">이전</button>
+  <span class="pos" id="pos" aria-live="polite"></span>
+  <button id="btn-next" aria-label="다음">다음</button>
+  <button id="btn-toc" aria-label="목차 열기">목차</button>
+  <button id="btn-mode" aria-label="보기 방식 바꾸기">스크롤</button>
+</nav>
+<div id="toc" role="dialog" aria-label="목차"><div class="panel"><strong style="font-size:20px">목차</strong></div></div>
+<div id="toast" role="status"></div>
+<script src="assets/app.js"></script>
+</body>
+</html>
